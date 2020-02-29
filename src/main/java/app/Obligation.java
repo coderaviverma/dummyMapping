@@ -1,9 +1,9 @@
 
-package model;
-
-import javax.persistence.*;
+package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="obligation")
@@ -13,10 +13,15 @@ public class Obligation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
-    @JoinColumn(name = "cuid")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("obligation-user")
+    @JoinColumn(name = "user_ref_id")
     private User user;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("obligation-app")
+    @JoinColumn(name = "app_id")
+    private App app;
 
     @Column(name="banking",nullable=true)
     private Long banking;
@@ -93,5 +98,13 @@ public class Obligation {
 
     public void setFoir(String foir) {
         this.foir = foir;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 }

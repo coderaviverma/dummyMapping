@@ -1,9 +1,9 @@
 
-package model;
-
-import javax.persistence.*;
+package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="identities")

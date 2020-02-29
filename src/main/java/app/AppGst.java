@@ -1,22 +1,22 @@
 
-package model;
-
-import javax.persistence.*;
+package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import javax.persistence.*;
+
 @Entity
-@Table(name="gst")
-public class Gst {
+@Table(name="app_gst")
+public class AppGst {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("gsts-user")
-    @JoinColumn(name = "cuid")
-    private User user;
+    @JsonBackReference("app-gst-app")
+    @JoinColumn(name = "app_id")
+    private App app;
 
     @Column(name="gstn",length=60,nullable=true)
     private String gstn;
@@ -31,12 +31,12 @@ public class Gst {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public App getApp() {
+        return app;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setApp(App app) {
+        this.app = app;
     }
 
     public String getGstn() {

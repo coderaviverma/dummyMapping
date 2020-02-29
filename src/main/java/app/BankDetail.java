@@ -1,10 +1,10 @@
 
-package model;
-
-import javax.persistence.*;
+package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import enms.ColletionType;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="bank_detail")
@@ -15,8 +15,8 @@ public class BankDetail {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("bank-detail-user")
-    @JoinColumn(name = "cuid")
+    @JsonBackReference("bank-detail-app")
+    @JoinColumn(name = "app-id")
     private User user;
 
     @Column(name="collection_acc_holder_name",length=152,nullable=true)

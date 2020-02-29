@@ -1,10 +1,10 @@
 
-package model;
-
-import javax.persistence.*;
+package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import enms.Gender;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="user_details")
@@ -14,7 +14,7 @@ public class UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("user-details-user")
     @JoinColumn(name = "cuid")
     private User user;

@@ -1,9 +1,9 @@
 
-package model;
-
-import javax.persistence.*;
+package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="mandate")
@@ -11,12 +11,12 @@ public class Mandate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;//_id rakh du har jagah
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("mandates-user")
-    @JoinColumn(name = "cuid")
-    private User user;
+    @JsonBackReference("mandates-app")
+    @JoinColumn(name = "app_id")
+    private App app;
 
     @Column(name="dms_doc_id",nullable=true)
     private String dmsDocId;
@@ -31,14 +31,6 @@ public class Mandate {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getDmsDocId() {

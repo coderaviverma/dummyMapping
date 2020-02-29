@@ -1,22 +1,32 @@
 
-package model;
+package app;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
-@Table(name="contactibility")
-public class Contactibility {
+@Table(name="user_contactibilities")
+public class UserContactibility {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("contactibilities-user")
-    @JoinColumn(name = "cuid")
+    @JsonBackReference("user-contactibilities-user")
+    @JoinColumn(name = "user_ref_id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("user-contactibilities-app")
+    @JoinColumn(name = "app_id")
+    private App app;
+
+    @OneToOne(mappedBy = "user_contactibilities", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("app-references-user-contactibilities")
+    private AppReferences appReferences;
 
     @Column(name="address_belongs_to",nullable=true)
     private String addressBelongsTo;
