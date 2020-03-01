@@ -341,6 +341,11 @@ public class User implements Serializable {
     }
 
     public void setAppDocuments(Set<AppDocument> appDocuments) {
+        if (appDocuments != null) {
+            for (AppDocument obj : appDocuments) {
+                obj.setUser(this);
+            }
+        }
         this.appDocuments = appDocuments;
     }
 
@@ -349,6 +354,13 @@ public class User implements Serializable {
     }
 
     public void setAppLMS(AppLMS appLMS) {
+        if (appLMS == null) {
+            if (this.appLMS != null) {
+                this.appLMS.setUser(null);
+            }
+        } else {
+            appLMS.setUser(this);
+        }
         this.appLMS = appLMS;
     }
 }
