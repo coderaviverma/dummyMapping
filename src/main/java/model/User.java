@@ -6,20 +6,31 @@ import java.util.Set;
 import javax.annotation.Generated;
 import javax.persistence.*;
 
+import app.StringPrefixedSequenceIdGenerator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import enms.UserType;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cuid")
-    private Long cuid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
+    @GenericGenerator(
+            name = "user_seq",
+            strategy = "app.StringPrefixedSequenceIdGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "50"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "1000_"),
+                    @org.hibernate.annotations.Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+    private String cuid;
+
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference("bank-detail-user")
@@ -113,11 +124,11 @@ public class User implements Serializable {
     @Column(name = "type", nullable = true)
     private UserType type;
 
-    public Long getCuid() {
+    public String getCuid() {
         return cuid;
     }
 
-    public void setCuid(Long cuid) {
+    public void setCuid(String cuid) {
         this.cuid = cuid;
     }
 

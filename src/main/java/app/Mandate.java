@@ -14,7 +14,7 @@ public class Mandate {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("mandates-app")
+    @JsonBackReference("mandate-app")
     @JoinColumn(name = "appid")
     private App app;
 

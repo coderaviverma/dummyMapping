@@ -15,17 +15,17 @@ public class AppInsurance {
     private Long id;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("app-references-app")
+    @JsonBackReference("app-insurance-app")
     @JoinColumn(name = "appid")
     private App app;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("app-references-app")
+    @JsonBackReference("app-insurance-user-contactibility")
     @JoinColumn(name = "contactibility_ref_id")
     private UserContactibility userContactibility;
 
      @OneToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("app-references-app")
+    @JsonBackReference("app-insurance-user-contactibility")
     @JoinColumn(name = "contactibility_ref_id2")
     private UserContactibility userContactibility2;
 

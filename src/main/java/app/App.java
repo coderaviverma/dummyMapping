@@ -38,7 +38,7 @@ public class App {
 
 
     @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
-    @JsonManagedReference("app-collaterals-app")
+    @JsonManagedReference("app-collateral-app")
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<AppCollateral> appCollaterals;
 
