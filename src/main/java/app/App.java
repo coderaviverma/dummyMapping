@@ -1,6 +1,8 @@
 package app;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -11,10 +13,18 @@ import java.util.Set;
 @Table(name = "app")
 public class App {
 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "appid")
-    private Long appId;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "app_seq")
+    @GenericGenerator(
+            name = "app_seq",
+            strategy = "app.StringPrefixedSequenceIdGenerator",
+            parameters = {
+                    @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "50"),
+                    @Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "1000_"),
+                    @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+    private String appId;
 
     @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
     @JsonManagedReference("app-pdc-details-app")
@@ -222,11 +232,11 @@ public class App {
     }
 
 
-    public Long getAppId() {
+    public String getAppId() {
         return appId;
     }
 
-    public void setAppId(Long appId) {
+    public void setAppId(String appId) {
         this.appId = appId;
     }
 
