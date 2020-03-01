@@ -24,6 +24,11 @@ public class AppInsurance {
     @JoinColumn(name = "contactibility_ref_id")
     private UserContactibility userContactibility;
 
+     @OneToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("app-references-app")
+    @JoinColumn(name = "contactibility_ref_id2")
+    private UserContactibility userContactibility2;
+
     @Column(name = "eligiblity",nullable = true)
     private String eligiblity;
     @Column(name = "partner",nullable = true)
@@ -254,5 +259,22 @@ public class AppInsurance {
 
     public void setNominee2_Gender(String nominee2_Gender) {
         this.nominee2_Gender = nominee2_Gender;
+    }
+
+    public UserContactibility getUserContactibility() {
+        return userContactibility;
+    }
+
+    public void setUserContactibility(UserContactibility userContactibility) {
+        this.userContactibility = userContactibility;
+        setUserContactibility2(this.userContactibility);
+    }
+
+    public UserContactibility getUserContactibility2() {
+        return userContactibility2;
+    }
+
+    public void setUserContactibility2(UserContactibility userContactibility2) {
+        this.userContactibility2 = userContactibility2;
     }
 }

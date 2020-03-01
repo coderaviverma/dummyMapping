@@ -96,11 +96,6 @@ public class User implements Serializable {
     @Column(name = "salutation", nullable = true)
     private String salutation;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference("user-apps-user")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<UserApp> userApps;
-
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonManagedReference("user-details-user")
     private UserDetails userDetails;
@@ -301,18 +296,6 @@ public class User implements Serializable {
         this.salutation = salutation;
     }
 
-    public Set<UserApp> getUserApps() {
-        return userApps;
-    }
-
-    public void setUserApps(Set<UserApp> userApps) {
-        if (userApps != null) {
-            for (UserApp obj : userApps) {
-                obj.setUser(this);
-            }
-        }
-        this.userApps = userApps;
-    }
 
     public UserDetails getUserDetails() {
         return userDetails;

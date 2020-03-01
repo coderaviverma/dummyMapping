@@ -28,6 +28,10 @@ public class UserContactibility {
     @JsonManagedReference("app-references-user-contactibility")
     private AppReferences appReferences;
 
+    @OneToOne(mappedBy = "user_contactibility", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("app-insurance-user-contactibility")
+    private AppInsurance appInsurance;
+
     @Column(name="address_belongs_to",nullable=true)
     private String addressBelongsTo;
 
@@ -255,6 +259,28 @@ public class UserContactibility {
     }
 
     public void setAppReferences(AppReferences appReferences) {
+        if (appReferences == null) {
+            if (this.appReferences != null) {
+                this.appReferences.setUserContactibility(null);
+            }
+        } else {
+            appReferences.setUserContactibility(this);
+        }
         this.appReferences = appReferences;
+    }
+
+    public AppInsurance getAppInsurance() {
+        return appInsurance;
+    }
+
+    public void setAppInsurance(AppInsurance appInsurance) {
+        if (appInsurance == null) {
+            if (this.appInsurance != null) {
+                this.appInsurance.setUserContactibility(null);
+            }
+        } else {
+            appInsurance.setUserContactibility(this);
+        }
+        this.appInsurance = appInsurance;
     }
 }
