@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="user_app")
-public class UserApp {
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserApp  extends BaseEntityAudit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

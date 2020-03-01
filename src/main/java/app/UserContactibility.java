@@ -2,13 +2,18 @@
 package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="user_contactibility")
-public class UserContactibility {
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserContactibility  extends BaseEntityAudit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

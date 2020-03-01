@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="mandate")
-public class Mandate {
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Mandate  extends BaseEntityAudit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -17,6 +17,8 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 @Entity
 @Table(name = "user")
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable {
     @Column(name = "cuid")
     @Id

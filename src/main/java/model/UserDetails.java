@@ -8,7 +8,9 @@ import enms.Gender;
 
 @Entity
 @Table(name="user_details")
-public class UserDetails {
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class UserDetails  extends BaseEntityAudit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

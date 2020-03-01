@@ -8,7 +8,9 @@ import enms.ColletionType;
 
 @Entity
 @Table(name="bank_detail")
-public class BankDetail {
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class BankDetail  extends BaseEntityAudit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

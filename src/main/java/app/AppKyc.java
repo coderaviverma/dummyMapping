@@ -1,24 +1,26 @@
 package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "app_kyc")
-public class AppKyc {
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+
+public class AppKyc  extends BaseEntityAudit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-kyc-user")
     @JoinColumn(name = "user_ref_id")
     private User user;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-kyc-app")
     @JoinColumn(name = "appid")

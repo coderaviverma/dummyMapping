@@ -2,6 +2,8 @@
 package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import enms.UserType;
 import org.hibernate.annotations.GenericGenerator;
@@ -14,7 +16,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class User implements Serializable {
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class User extends BaseEntityAudit  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
     @GenericGenerator(

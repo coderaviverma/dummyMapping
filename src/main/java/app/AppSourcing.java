@@ -1,19 +1,22 @@
 package app;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import model.User;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "app_sourcing")
-public class AppSourcing {
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class AppSourcing  extends BaseEntityAudit implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-
     @OneToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-sourcing-app")
     @JoinColumn(name = "appid")
