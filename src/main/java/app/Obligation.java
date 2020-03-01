@@ -20,7 +20,7 @@ public class Obligation {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonBackReference("obligation-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
     @Column(name="banking",nullable=true)

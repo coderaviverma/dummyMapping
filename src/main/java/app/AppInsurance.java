@@ -16,7 +16,7 @@ public class AppInsurance {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-references-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
     @OneToOne(fetch = FetchType.LAZY)

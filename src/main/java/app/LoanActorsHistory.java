@@ -16,7 +16,7 @@ public class LoanActorsHistory {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("loan-actors-history-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
     @Column(name = "user_role",nullable = true)

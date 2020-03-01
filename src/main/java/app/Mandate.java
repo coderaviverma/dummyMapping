@@ -15,7 +15,7 @@ public class Mandate {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("mandates-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
     @Column(name="dms_doc_id",nullable=true)
@@ -55,5 +55,13 @@ public class Mandate {
 
     public void setUmrn(String umrn) {
         this.umrn = umrn;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 }

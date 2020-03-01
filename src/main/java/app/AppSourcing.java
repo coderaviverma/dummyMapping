@@ -16,7 +16,7 @@ public class AppSourcing {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-sourcing-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
     @Column(name = "channel", nullable = true)
@@ -102,6 +102,22 @@ public class AppSourcing {
 
     public void setRegionalSalesManager(String regionalSalesManager) {
         this.regionalSalesManager = regionalSalesManager;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 
     public String getZonalSalesManager() {

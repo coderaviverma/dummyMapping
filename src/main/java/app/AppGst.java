@@ -15,7 +15,7 @@ public class AppGst {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-gst-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
     @Column(name="gstn",length=60,nullable=true)

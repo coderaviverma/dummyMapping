@@ -22,24 +22,19 @@ public class User implements Serializable {
     private Long cuid;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("user-user")
-    @JoinColumn(name = "app_id")
+    @JsonBackReference("user-app")
+    @JoinColumn(name = "appid")
     private App app;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("user-user")
-    @JoinColumn(name = "appid")
-    private AppSourcing appSourcing;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference("bank-detail-user")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<BankDetail> bankDetails;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference("contactibilities-user")
+    @JsonManagedReference("user-contactibility-user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<UserContactibility> contactibilities;
+
+   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference("app_document-user")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Set<AppDocument> appDocuments;
 
     @Column(name = "corporate_structure", nullable = true)
     private String corporateStructure;
@@ -51,14 +46,14 @@ public class User implements Serializable {
     private String displayName;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference("educations-user")
+    @JsonManagedReference("user-education-user")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<Education> educations;
+    private Set<UserEducation> userEducations;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference("employments-user")
+    @JsonManagedReference("user-employment-user")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<Employment> employments;
+    private Set<UserEmployment> userEmployments;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference("entity-officers-user")
@@ -68,10 +63,9 @@ public class User implements Serializable {
     @Column(name = "first_name", length = 50, nullable = true)
     private String firstName;
 
-
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference("identities-user")
-    private Identities identities;
+    @JsonManagedReference("user-identities-user")
+    private UserIdentities userIdentities;
 
     @Column(name = "last_name", length = 50, nullable = true)
     private String lastName;
@@ -111,6 +105,10 @@ public class User implements Serializable {
     @JsonManagedReference("user-details-user")
     private UserDetails userDetails;
 
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("app-lms-user")
+    private AppLMS appLMS;
+
     @Column(name = "type", nullable = true)
     private UserType type;
 
@@ -120,19 +118,6 @@ public class User implements Serializable {
 
     public void setCuid(Long cuid) {
         this.cuid = cuid;
-    }
-
-    public Set<BankDetail> getBankDetails() {
-        return bankDetails;
-    }
-
-    public void setBankDetails(Set<BankDetail> bankDetails) {
-        if (bankDetails != null) {
-            for (BankDetail bankDetail : bankDetails) {
-                bankDetail.setUser(this);
-            }
-        }
-        this.bankDetails = bankDetails;
     }
 
     public Set<UserContactibility> getContactibilities() {
@@ -172,30 +157,30 @@ public class User implements Serializable {
         this.displayName = displayName;
     }
 
-    public Set<Education> getEducations() {
-        return educations;
+    public Set<UserEducation> getUserEducations() {
+        return userEducations;
     }
 
-    public void setEducations(Set<Education> educations) {
-        if (educations != null) {
-            for (Education education : educations) {
-                education.setUser(this);
+    public void setUserEducations(Set<UserEducation> userEducations) {
+        if (userEducations != null) {
+            for (UserEducation userEducation : userEducations) {
+                userEducation.setUser(this);
             }
         }
-        this.educations = educations;
+        this.userEducations = userEducations;
     }
 
-    public Set<Employment> getEmployments() {
-        return employments;
+    public Set<UserEmployment> getUserEmployments() {
+        return userEmployments;
     }
 
-    public void setEmployments(Set<Employment> employments) {
-        if (employments != null) {
-            for (Employment employment : employments) {
-                employment.setUser(this);
+    public void setUserEmployments(Set<UserEmployment> userEmployments) {
+        if (userEmployments != null) {
+            for (UserEmployment userEmployment : userEmployments) {
+                userEmployment.setUser(this);
             }
         }
-        this.employments = employments;
+        this.userEmployments = userEmployments;
     }
 
     public Set<EntityOfficer> getEntityOfficers() {
@@ -221,19 +206,19 @@ public class User implements Serializable {
     }
 
 
-    public Identities getIdentities() {
-        return identities;
+    public UserIdentities getUserIdentities() {
+        return userIdentities;
     }
 
-    public void setIdentities(Identities identities) {
-        if (identities == null) {
-            if (this.identities != null) {
-                this.identities.setUser(null);
+    public void setUserIdentities(UserIdentities userIdentities) {
+        if (userIdentities == null) {
+            if (this.userIdentities != null) {
+                this.userIdentities.setUser(null);
             }
         } else {
-            identities.setUser(this);
+            userIdentities.setUser(this);
         }
-        this.identities = identities;
+        this.userIdentities = userIdentities;
     }
 
     public String getLastName() {
@@ -350,5 +335,37 @@ public class User implements Serializable {
 
     public void setType(UserType type) {
         this.type = type;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
+    }
+
+    public Set<AppDocument> getAppDocuments() {
+        return appDocuments;
+    }
+
+    public void setAppDocuments(Set<AppDocument> appDocuments) {
+        this.appDocuments = appDocuments;
+    }
+
+    public AppLMS getAppLMS() {
+        return appLMS;
+    }
+
+    public void setAppLMS(AppLMS appLMS) {
+        this.appLMS = appLMS;
     }
 }

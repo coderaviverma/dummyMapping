@@ -7,8 +7,8 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name="employment")
-public class Employment {
+@Table(name="user_employment")
+public class UserEmployment {
 
 
     @Id
@@ -16,7 +16,7 @@ public class Employment {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("employments-user")
+    @JsonBackReference("user-employment-user")
     @JoinColumn(name = "cuid")
     private User user;
 

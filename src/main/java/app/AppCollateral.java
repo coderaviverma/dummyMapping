@@ -14,7 +14,7 @@ public class AppCollateral {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-collateral-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
     @Column(name = "brand",nullable = true)

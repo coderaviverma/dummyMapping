@@ -6,15 +6,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name="education")
-public class Education {
+@Table(name="user_education")
+public class UserEducation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("educations-user")
+    @JsonBackReference("user-education-user")
     @JoinColumn(name = "cuid")
     private User user;
 

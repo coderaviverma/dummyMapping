@@ -16,7 +16,7 @@ public class AppPdcDetails {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-pdc-details-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
     @Column(name = "ifsc")
@@ -68,5 +68,21 @@ public class AppPdcDetails {
 
     public void setIsPresented(String isPresented) {
         this.isPresented = isPresented;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 }

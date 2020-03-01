@@ -17,7 +17,7 @@ public class BankDetail {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("bank-detail-app")
     @JoinColumn(name = "app-id")
-    private User user;
+    private App app;
 
     @Column(name="collection_acc_holder_name",length=152,nullable=true)
     private String collectionAccHolderName;
@@ -63,12 +63,12 @@ public class BankDetail {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public App getApp() {
+        return app;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setApp(App app) {
+        this.app = app;
     }
 
     public String getCollectionAccHolderName() {

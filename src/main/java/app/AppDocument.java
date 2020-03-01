@@ -16,16 +16,16 @@ public class AppDocument {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
-    @JsonManagedReference("app-documents-user")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<User> users;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-document-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("app-documents-user")
+    @JoinColumn(name = "cuid")
+    private User user;
 
 
     @Column(name = "fulfilment_ref_id",nullable = true)
@@ -167,5 +167,22 @@ public class AppDocument {
 
     public void setIsClickWraped(String isClickWraped) {
         this.isClickWraped = isClickWraped;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
     }
 }

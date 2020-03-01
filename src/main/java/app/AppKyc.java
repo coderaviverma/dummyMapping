@@ -21,7 +21,7 @@ public class AppKyc {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-kyc-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
     @Column(name = "kyc_reference_id1",nullable = true)

@@ -13,7 +13,7 @@ public class App {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "app_id")
+    @Column(name = "appid")
     private Long appId;
 
     @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
@@ -33,7 +33,7 @@ public class App {
     private Set<AppCollateral> appCollaterals;
 
     @OneToMany(mappedBy = "app", cascade = CascadeType.ALL)
-    @JsonManagedReference("user-contactibilities-app")
+    @JsonManagedReference("user-contactibility-app")
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<UserContactibility> userContactibilities;
 
@@ -221,4 +221,205 @@ public class App {
         this.dpdDays = dpdDays;
     }
 
+
+    public Long getAppId() {
+        return appId;
+    }
+
+    public void setAppId(Long appId) {
+        this.appId = appId;
+    }
+
+    public Set<AppPdcDetails> getAppPdcDetails() {
+        return appPdcDetails;
+    }
+
+    public void setAppPdcDetails(Set<AppPdcDetails> appPdcDetails) {
+        if (appPdcDetails != null) {
+            for (AppPdcDetails obj : appPdcDetails) {
+                obj.setApp(this);
+            }
+        }
+        this.appPdcDetails = appPdcDetails;
+    }
+
+    public Set<AppDocument> getAppDocuments() {
+        return appDocuments;
+    }
+
+    public void setAppDocuments(Set<AppDocument> appDocuments) {
+        if (appDocuments != null) {
+            for (AppDocument obj : appDocuments) {
+                obj.setApp(this);
+            }
+        }
+        this.appDocuments = appDocuments;
+    }
+
+    public Set<AppCollateral> getAppCollaterals() {
+
+        return appCollaterals;
+    }
+
+    public void setAppCollaterals(Set<AppCollateral> appCollaterals) {
+        if (appCollaterals != null) {
+            for (AppCollateral obj : appCollaterals) {
+                obj.setApp(this);
+            }
+        }
+        this.appCollaterals = appCollaterals;
+    }
+
+    public Set<UserContactibility> getUserContactibilities() {
+        return userContactibilities;
+    }
+
+    public void setUserContactibilities(Set<UserContactibility> userContactibilities) {
+        if (userContactibilities != null) {
+            for (UserContactibility obj : userContactibilities) {
+                obj.setApp(this);
+            }
+        }
+        this.userContactibilities = userContactibilities;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        if (users != null) {
+            for (User obj : users) {
+                obj.setApp(this);
+            }
+        }
+        this.users = users;
+    }
+
+    public Set<LoanOffer> getLoanOffers() {
+        return loanOffers;
+    }
+
+    public void setLoanOffers(Set<LoanOffer> loanOffers) {
+        if (loanOffers != null) {
+            for (LoanOffer obj : loanOffers) {
+                obj.setApp(this);
+            }
+        }
+        this.loanOffers = loanOffers;
+    }
+
+    public Set<LoanActorsHistory> getLoanActorsHistories() {
+        return loanActorsHistories;
+    }
+
+    public void setLoanActorsHistories(Set<LoanActorsHistory> loanActorsHistories) {
+        if (loanActorsHistories != null) {
+            for (LoanActorsHistory obj : loanActorsHistories) {
+                obj.setApp(this);
+            }
+        }
+        this.loanActorsHistories = loanActorsHistories;
+    }
+
+    public Set<LoanCharges> getLoanCharges() {
+        return loanCharges;
+    }
+
+    public void setLoanCharges(Set<LoanCharges> loanCharges) {
+        if (loanCharges != null) {
+            for (LoanCharges obj : loanCharges) {
+                obj.setApp(this);
+            }
+        }
+        this.loanCharges = loanCharges;
+    }
+
+    public Set<AppLMS> getAppLMS() {
+        return appLMS;
+    }
+
+    public void setAppLMS(Set<AppLMS> appLMS) {
+        if (appLMS != null) {
+            for (AppLMS obj : appLMS) {
+                obj.setApp(this);
+            }
+        }
+        this.appLMS = appLMS;
+    }
+
+    public Obligation getObligation() {
+        return obligation;
+    }
+
+    public void setObligation(Obligation obligation) {
+        if (obligation == null) {
+            if (this.obligation != null) {
+                this.obligation.setApp(null);
+            }
+        } else {
+            obligation.setApp(this);
+        }
+        this.obligation = obligation;
+    }
+
+    public Mandate getMandate() {
+        return mandate;
+    }
+
+    public void setMandate(Mandate mandate) {
+        if (mandate == null) {
+            if (this.mandate != null) {
+                this.mandate.setApp(null);
+            }
+        } else {
+            mandate.setApp(this);
+        }
+        this.mandate = mandate;
+    }
+
+    public BankDetail getBankDetail() {
+        return bankDetail;
+    }
+
+    public void setBankDetail(BankDetail bankDetail) {
+        if (bankDetail == null) {
+            if (this.bankDetail != null) {
+                this.bankDetail.setApp(null);
+            }
+        } else {
+            bankDetail.setApp(this);
+        }
+        this.bankDetail = bankDetail;
+    }
+
+    public AppSourcing getAppSourcing() {
+        return appSourcing;
+    }
+
+    public void setAppSourcing(AppSourcing appSourcing) {
+        if (appSourcing == null) {
+            if (this.appSourcing != null) {
+                this.appSourcing.setApp(null);
+            }
+        } else {
+            appSourcing.setApp(this);
+        }
+        this.appSourcing = appSourcing;
+    }
+
+    public AppInsurance getAppInsurance() {
+        return appInsurance;
+    }
+
+    public void setAppInsurance(AppInsurance appInsurance) {
+        if (appInsurance == null) {
+            if (this.appInsurance != null) {
+                this.appInsurance.setApp(null);
+            }
+        } else {
+            appInsurance.setApp(this);
+        }
+        this.appInsurance = appInsurance;
+    }
 }

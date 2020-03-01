@@ -15,14 +15,14 @@ public class AppReferences {
 
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("app-references-user-contactibilities")
+    @JsonBackReference("app-references-user-contactibility")
     @JoinColumn(name = "contactibility_ref_id")
     private UserContactibility userContactibility;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("app-references-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
 

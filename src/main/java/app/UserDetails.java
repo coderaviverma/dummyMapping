@@ -14,7 +14,7 @@ public class UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JsonBackReference("user-details-user")
     @JoinColumn(name = "cuid")
     private User user;

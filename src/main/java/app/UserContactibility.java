@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.*;
 
 @Entity
-@Table(name="user_contactibilities")
+@Table(name="user_contactibility")
 public class UserContactibility {
 
     @Id
@@ -15,17 +15,17 @@ public class UserContactibility {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("user-contactibilities-user")
+    @JsonBackReference("user-contactibility-user")
     @JoinColumn(name = "user_ref_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference("user-contactibilities-app")
-    @JoinColumn(name = "app_id")
+    @JsonBackReference("user-contactibility-app")
+    @JoinColumn(name = "appid")
     private App app;
 
-    @OneToOne(mappedBy = "user_contactibilities", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference("app-references-user-contactibilities")
+    @OneToOne(mappedBy = "user_contactibility", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference("app-references-user-contactibility")
     private AppReferences appReferences;
 
     @Column(name="address_belongs_to",nullable=true)
@@ -240,5 +240,21 @@ public class UserContactibility {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public App getApp() {
+        return app;
+    }
+
+    public void setApp(App app) {
+        this.app = app;
+    }
+
+    public AppReferences getAppReferences() {
+        return appReferences;
+    }
+
+    public void setAppReferences(AppReferences appReferences) {
+        this.appReferences = appReferences;
     }
 }

@@ -16,7 +16,7 @@ public class LoanCharges {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference("loan-charges-app")
-    @JoinColumn(name = "app_id")
+    @JoinColumn(name = "appid")
     private App app;
 
 
